@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - setup
+    - unclutter
+    - mosquitto
+    - mysql
+    - apache
+    - php
+    - chromium

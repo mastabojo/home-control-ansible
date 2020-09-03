@@ -1,0 +1,14 @@
+---
+
+# Install Chromium
+
+# Setup kiosk mode
+# To start Chromium in kiosk mode create ~/.config/autostart/autoChromium.desktop with following contents:
+#[Desktop Entry]
+#Type=Application
+#Exec=/usr/bin/chromium-browser --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk -app=http://hcc.local
+#Hidden=false
+#X-GNOME-Autostart-enabled=true
+#Name[en_US]=AutoChromium
+#Name=AutoChromium
+#Comment=Start Chromium when GNOME starts
