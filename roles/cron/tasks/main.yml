@@ -1,0 +1,80 @@
+---
+
+### --
+### -- Cron jobs as pi
+### --
+
+# Get weather data
+- name: Weather data
+  cron: 
+    name: "Get weather data"
+    minute: "5,35"
+    job: "/usr/bin/php {{ app_jobs_dir }}getweatherdata.php"
+    user: pi
+
+# Get weather forecast
+- name: Weather forecast
+  cron: 
+    name: "Get weather forecast"
+    minute: "33"
+    hour: "*/4"
+    job: "/usr/bin/php {{ app_jobs_dir }}getweatherforecast.php"
+    user: pi
+
+# Get heat pump data KWh
+- name: Heat pump KWh
+  cron: 
+    name: "Get heat pump KWh"
+    minute: "0-50/10"
+    job: "/usr/bin/php {{ app_jobs_dir }}readHeatPumpKWh.php"
+    user: pi
+
+# Get heat pump other data
+- name: Heat pump other data
+  cron: 
+    name: "Get heat pump other data"
+    minute: "3,23,43"
+    job: "/usr/bin/php {{ app_jobs_dir }}readHeatPumpData.php"
+    user: pi
+
+# Read temperature and humidity
+- name: Temperature and humidity
+  cron: 
+    name: "Get temperature and humidity"
+    minute: "*/10"
+    job: "/usr/bin/php {{ app_jobs_dir }}read_temp_and_humidity.php"
+    user: pi
+
+### --
+### -- Cron jobs as root
+### --
+
+# CPU temeprature check
+- name: "CPU temeprature check"
+  cron: 
+    name: "Run CPU temeprature check"
+    minute: "*/3"
+    job: "/usr/bin/php {{ app_jobs_dir }}overheat_control.php >/dev/null 2>&1"
+
+# CPU temperature logging
+- name: "CPU temperature logging"
+  cron: 
+    name: "Run CPU temperature logging"
+    minute: "*/2"
+    job: "/usr/bin/php {{ app_jobs_dir }}cpu_temperature_log.php >/dev/null 2>&1"
+
+# Reduce brightness
+- name: "Reduce brightness"
+  cron: 
+    name: "Reduce brightness"
+    minute: "30"
+    hour: "6"
+    job: "echo 255 > /sys/class/backlight/rpi_backlight/brightness"
+
+# Restore brightness
+- name: "Restore brightness"
+  cron: 
+    name: "Restore brightness"
+    minute: "30"
+    hour: "23"
+    job: "echo 32 > /sys/class/backlight/rpi_backlight/brightness"
