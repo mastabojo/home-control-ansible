@@ -49,7 +49,8 @@
 ### -- Cron jobs as root
 ### --
 
-# CPU temeprature check
+# CPU temperature check
+# https://github.com/mastabojo/home-control/wiki/Tips#check-raspberry-pi-cpu-temperature
 - name: "CPU temeprature check"
   cron: 
     name: "Run CPU temeprature check"

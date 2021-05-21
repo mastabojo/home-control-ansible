@@ -12,9 +12,6 @@
 # https://www.raspberrypi.org/documentation/configuration/security.md
 
 
-# Setup cron jobs
-# - CPU temperature - https://github.com/mastabojo/home-control/wiki/Tips#check-raspberry-pi-cpu-temperature
-
 ### Run the Python main loop (see rc.local)
 
 

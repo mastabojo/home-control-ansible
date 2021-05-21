@@ -1,0 +1,12 @@
+---
+
+# Install PHP and modules
+# https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md
+# https://pimylifeup.com/raspberry-pi-apache/
+
+# sudo apt install php
+# sudo apt install libapache2-mod-php{{ php_version }} php{{ php_version }}-mbstring php{{ php_version }}-mysql php{{ php_version }}-curl php{{ php_version }}-gd php{{ php_version }}-zip
+
+# Adjust permissions
+# sudo usermod -a -G www-data pi
+# sudo chown -R -f www-data:www-data /var/www
