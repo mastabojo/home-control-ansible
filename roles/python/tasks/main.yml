@@ -1,0 +1,9 @@
+---
+
+# Python related stuff
+
+# Instal Pip
+# sudo apt install python3-pip
+
+# Install Paho Mqtt Python client
+# pip3 install paho-mqtt
