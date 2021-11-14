@@ -1,17 +1,30 @@
 ---
 
 # Change default password for user pi
-# https://www.raspberrypi.org/documentation/configuration/security.md
+- name: Change default password for user pi
+  ansible.builtin.user:
+    name: pi
+    update_password: always
+    password: "{{ ansible_user_pass|password_hash('sha512') }}"
 
+# Make sudo require a password (effectively deleting *_pi_nopasswd files from /etc/sudoers.d/)
+- name: 
+  ansible.builtin.file:
+    path: {{ item }}
+    state: absent
+    with_fileglob:
+      - "/etc/sudoers.d/*_pi_nopasswd"
 
 # Create admin user
-# https://www.raspberrypi.org/documentation/configuration/security.md
+- name: Creating user admin with admin access
+  ansible.builtin.user: 
+    name: admin
+    password: "{{ ansible_user_pass|password_hash('sha512') }}"
+    update_password: on_create
+    groups: adm, sudo, gpio
+    append: yes
 
-
-# Make sudo require a password
-# https://www.raspberrypi.org/documentation/configuration/security.md
-
+# Instal Pip
+# sudo apt install python3-pip
 
 ### Run the Python main loop (see rc.local)
-
-

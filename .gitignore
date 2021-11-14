@@ -1,2 +1,4 @@
 .history
 *.code-workspace
+*.sh
+hosts

@@ -1,4 +1,35 @@
 ---
 
 # Install fail2ban
-# https://www.raspberrypi.org/documentation/configuration/security.md
+- name: Install fail2ban
+  apt: 
+    name: fail2ban
+    update_cache: yes
+    state: latest
+
+# Create local jail config from template
+- name: Create local jail config
+  template:
+    src: jail.local.j2
+    dest: "/etc/fail2ban/jail.local"
+    mode: 0640
+    notify: Restart fail2ban
+
+Restart fail2ban
+
+# Instructions
+# See https://pimylifeup.com/raspberry-pi-fail2ban/
+#
+# sudo apt-get install fail2ban
+# sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+# sudo nano /etc/fail2ban/jail.local
+# Protect SSH: edit /etc/fail2ban/jail.local and add following to the [sshd] section
+#   enabled = true
+#   filter = sshd
+#   banaction = iptables-multiport
+#   bantime = 900
+#   maxretry = 3
+# Protect Apache: edit /etc/fail2ban/jail.local and add following to the [apache-badbots] section
+#   enabled = true
+#   filter = apache-badbots
+# sudo service fail2ban restart

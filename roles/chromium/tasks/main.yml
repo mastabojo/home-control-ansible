@@ -1,14 +1,28 @@
 ---
 
 # Install Chromium
+- name: Install Apache
+  apt: 
+    name: chromium
+    update_cache: yes
+    state: latest
 
-# Setup kiosk mode
-# To start Chromium in kiosk mode create ~/.config/autostart/autoChromium.desktop with following contents:
-#[Desktop Entry]
-#Type=Application
-#Exec=/usr/bin/chromium-browser --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk -app=http://hcc.local
-#Hidden=false
-#X-GNOME-Autostart-enabled=true
-#Name[en_US]=AutoChromium
-#Name=AutoChromium
-#Comment=Start Chromium when GNOME starts
+# Setup Chromium to start in kiosk mode
+- name: Create Chromium autostart file
+  copy: 
+    dest: "home/pi/.config/autostart/autoChromium.desktop"
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Exec=/usr/bin/chromium-browser --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk -app=http://hcc.local
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name[en_US]=AutoChromium
+      Name=AutoChromium
+      Comment=Start Chromium when Pi starts      
+
+- name: Set permissions for Chromium autostart file
+  ansible.builtin.file:
+    path: "home/pi/.config/autostart/autoChromium.desktop"
+    mode: 0755
+    owner: pi

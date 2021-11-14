@@ -1,0 +1,29 @@
+# Fail2Ban local configuration file.
+# Overrides changes in the main jail file, /etc/fail2ban/jail.conf
+
+
+[DEFAULT]
+
+bantime  = 600
+maxretry = 3
+ignoreip = 192.168.2.0/16
+findtime = {{ fail2ban_findtime }}
+
+
+#
+# JAILS
+#
+
+[sshd]
+
+enabled = true
+filter = sshd
+banaction = iptables-multiport
+bantime = 900
+maxretry = 3
+
+
+[apache-badbots]
+
+enabled = true
+filter = apache-badbots

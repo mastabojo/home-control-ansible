@@ -3,10 +3,13 @@
   become: yes
   roles:
     - setup
-    - unclutter
-    - mosquitto
-    - mysql
     - apache
     - php
-    - chromium
-    - cron
+    # - mysql
+    - mosquitto
+    # - cron
+    
+    # - chromium
+    # - unclutter
+    
+    
