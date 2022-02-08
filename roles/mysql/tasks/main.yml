@@ -1,0 +1,36 @@
+---
+
+# Install mysql
+- name: Install Mysql
+  apt:
+    state: latest
+    name:
+      - mariadb-server
+      # - mysql-client
+  tags: mysql
+
+# Set the root password if not set
+- name: Set the root password
+  community.mysql.mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+
+- name: Create the .my.cnf file
+  template:
+    src: .my.cnf.j2
+    dest: /root/.my.cnf
+    mode: 0600
+
+- name: Flush Privileges
+  shell: mysql -u root -e 'FLUSH PRIVILEGES'
+
+
+# - name: Add HCC2 database
+#   community.mysql.mysql_db:
+#     name: hcc2db
+
+# - name: Add users
+#   community.mysql.mysql_user:
+#     name: hcc

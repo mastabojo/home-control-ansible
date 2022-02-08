@@ -2,13 +2,24 @@
 
 # Install UFW
 # https://www.raspberrypi.org/documentation/configuration/security.md
-
-# Instructions
-# https://pimylifeup.com/raspberry-pi-ufw/
 #
-# sudo apt install ufw
-# sudo ufw allow 22
-# sudo ufw allow 80
-# sudo ufw allow 443
-# sudo ufw allow ...
-# sudo ufw enable
+
+- name: Install UFW
+  become: yes
+  apt: 
+    name: ufw
+    update_cache: yes
+    state: latest
+
+- name: Allow needed ports
+  community.general.ufw:
+    rule: allow
+    port: '{{ item }}'
+  loop:
+    - "22"
+    - "80"
+    - "443"
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled

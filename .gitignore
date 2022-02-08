@@ -2,3 +2,5 @@
 *.code-workspace
 *.sh
 hosts
+ansible.log
+ansible.cfg

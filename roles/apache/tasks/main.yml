@@ -6,10 +6,11 @@
     update_cache: yes
     state: latest
 
+
 - name: Set site conf file
   template:
-    src: "hcc2.conf.j2"
-    dest: "/etc/apache2/sites-available/{{ app_rname }}.conf"
+    src: "{{ app_name }}.conf.j2"
+    dest: "/etc/apache2/sites-available/{{ app_name }}.conf"
   tags: apache
 
 - name: Enable site
@@ -27,13 +28,5 @@
   with_items:
     - 000-default.conf
     - default-ssl.conf
-  notify: Reload Apache
-  tags: apache
-
-# UFW Configuration
-- name: "UFW - Allow HTTP on port 80"
-  ufw:
-    rule: allow
-    port: "80"
-    proto: tcp
+  notify: Restart Apache
   tags: apache

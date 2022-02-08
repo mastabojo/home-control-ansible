@@ -10,3 +10,16 @@
 # Adjust permissions
 # sudo usermod -a -G www-data pi
 # sudo chown -R -f www-data:www-data /var/www
+
+- name: Install PHP and dependencies
+  apt:
+    state: latest
+    name:
+      - php
+      - libapache2-mod-php
+      - php-mbstring
+      - php-curl
+      - php-zip
+      - php-mysql
+  tags: php
+  notify: Restart Apache

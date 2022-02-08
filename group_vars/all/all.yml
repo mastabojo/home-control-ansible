@@ -9,13 +9,17 @@ app_root_domain: "{{ app_name }}.local"
 # PHP Setup (depends on environment)
 php_version: "8"
 
-# Laravel Env Variables
+# Mysql
 db_connection: hcc2db
 db_host: localhost
 db_port: 3306
 
-# Web Server Setup
-server_admin_email: {{ server_admin_email }}
+# Web Server
+# server_admin_email: "{{ server_admin_email }}"
 http_host: "{{ ansible_facts.eth0.ipv4.address }}"
 app_root_dir: /var/www/{{ app_root_domain }}
 document_root: "{{ app_root_dir }}/public"
+
+# Silence the interpreter warning
+# See: https://docs.ansible.com/ansible/2.10/reference_appendices/interpreter_discovery.html
+ansible_python_interpreter: auto_legacy_silent

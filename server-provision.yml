@@ -1,15 +1,15 @@
 ---
-- hosts: all
-  become: yes
+- hosts: hcc2
   roles:
     - setup
+    - ufw
+    - robertdebock.fail2ban
     - apache
+    - mysql
     - php
-    # - mysql
-    - mosquitto
+    # - mosquitto
     # - cron
-    
     # - chromium
     # - unclutter
-    
-    
+  vars:
+    ansible_become: yes

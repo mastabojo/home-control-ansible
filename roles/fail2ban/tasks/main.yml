@@ -1,21 +1,5 @@
 ---
-
-# Install fail2ban
-- name: Install fail2ban
-  apt: 
-    name: fail2ban
-    update_cache: yes
-    state: latest
-
-# Create local jail config from template
-- name: Create local jail config
-  template:
-    src: jail.local.j2
-    dest: "/etc/fail2ban/jail.local"
-    mode: 0640
-    notify: Restart fail2ban
-
-Restart fail2ban
+### Currently not used. Replaced with robertdebock.fail2ban role
 
 # Instructions
 # See https://pimylifeup.com/raspberry-pi-fail2ban/
@@ -33,3 +17,19 @@ Restart fail2ban
 #   enabled = true
 #   filter = apache-badbots
 # sudo service fail2ban restart
+
+# # Install fail2ban
+# - name: Install fail2ban
+#   apt: 
+#     name: fail2ban
+#     update_cache: yes
+#     state: latest
+
+# # Create local jail config from template
+# - name: Create local jail config
+#   template:
+#     src: jail.local.j2
+#     dest: "/etc/fail2ban/jail.local"
+#     mode: 0640
+#     notify: Restart fail2ban
+
