@@ -1,7 +1,7 @@
 ---
 
 # Install Chromium
-- name: Install Apache
+- name: Install Chromium
   apt: 
     name: chromium
     update_cache: yes
